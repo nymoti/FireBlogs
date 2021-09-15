@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <BlogPost/>
+    <BlogPost :post="welcomeScreen"/>
+    <BlogPost :post="post" v-for="(post, index) in sampleBlogPost" :key="index"/>
   </div>
 </template>
 
@@ -14,16 +15,16 @@ export default {
   data() {
     return {
       welcomeScreen: {
-        title: "Several Bootstrap components utilize",
-        blogPost: "Several Bootstrap components utilize z-index, the CSS property that helps control layout by providing a third axis to arrange content. We utilize a default z-index scale in Bootstrap that’s been designed to properly layer navigation, tooltips and popovers, modals, and more.",
+        title: "Welcome",
+        blogPost: "Several Bootstrap components utilize z-index, the CSS property that helps control layout by providing a third axis to arrange content. We utilize a default z-index scale in B.",
         welcomeScreen: true,
         photo: "coding"
       },
-      simpleBlogPost: [
+      sampleBlogPost: [
         {
           title: "Bootstrap primarily ",
           blogHTML: "Bootstrap primarily uses the following media query ranges—or breakpoints—in our source Sass files for our layout, grid system, and components.",
-          blogCoverPhoto: "Beautiful-stories"
+          blogCoverPhoto: "beautiful-stories"
         },
         {
           title: "There are also media ",
