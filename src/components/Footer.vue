@@ -22,9 +22,9 @@
               <div class="col-2">
                   <ul>
                       <router-link class="link" :to="{name: 'Home'}">Home</router-link>
-                      <router-link class="link" :to="{name: 'blog'}">Blog</router-link>
-                      <router-link class="link" :to="{name: 'newpost'}">Create Post</router-link>
-                      <router-link class="link" :to="{name: 'login'}">Login/Register</router-link>
+                      <router-link class="link" :to="{name: 'Blog'}">Blog</router-link>
+                      <router-link class="link" to="#">Create Post</router-link>
+                      <router-link class="link" :to="{name: 'Login'}">Login/Register</router-link>
                   </ul>
               </div>
           </div>
