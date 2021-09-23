@@ -9,7 +9,7 @@
                 <router-link class="link" :to="{name: 'Home'}">Home</router-link>
                 <router-link class="link" :to="{name: 'Blogs'}">Blogs</router-link>
                 <router-link class="link" to="#">Create Post</router-link>
-                <router-link class="link" :to="{name: 'Login'}">BLogin/Register</router-link>
+                <router-link class="link" :to="{name: 'Login'}">Login/Register</router-link>
             </ul>
         </div>
       </nav>
