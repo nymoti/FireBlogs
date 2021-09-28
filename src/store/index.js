@@ -51,7 +51,10 @@ export default new Vuex.Store({
     },
     toggleEditPost(state, payload) {
       state.editPost = payload;
-      console.log(state.editPost);
+      // console.log(state.editPost);
+    },
+    filterBlogPost(state, payload) {
+      state.blogPosts = state.blogPosts.filter( (post) => { post.blogID !== payload });
     },
     updateUser(state, payload) {
       state.user = payload;
@@ -84,7 +87,6 @@ export default new Vuex.Store({
       const dbResults = await dataBase.get();
       commit("setProfileInfo", dbResults);
       commit("setProfileInitials");
-      console.log(dbResults);
     },
     async getPosts({ state }) {
       const dataBase = await db.collection("blogPosts").orderBy("date", "desc");
@@ -102,7 +104,12 @@ export default new Vuex.Store({
         }
       });
       state.postLoaded = true;
-      console.log(state.blogPosts);
+    },
+    async deletePost({ commit }, payload) {
+      const getPosts = await db.collection("blogPosts").doc(payload);
+      await getPosts.delete();
+      commit("filterBlogPost", payload);
+      // window.location.reload();
     },
     async updateUserSettings({ commit, state }) {
       const dataBase = await db.collection("users").doc(state.profileId);
