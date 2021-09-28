@@ -1,6 +1,7 @@
 <template>
   <div class="create-post">
       <BlogCoverPreview v-show="this.$store.state.blogPhotoPreview" />
+      <Loading v-show="loading"/>
       <div class="container">
           <div :class="{ 'invisible': !error }" class="err-message">
               <p><span>Error: {{ this.errorMsg }}</span></p>
@@ -31,6 +32,7 @@
 
 <script>
 import BlogCoverPreview from "../components/BlogCoverPreview";
+import Loading from "../components/Loading";
 import firebase from "firebase/app";
 import "firebase/storage";
 import db from "../firebase/firebaseInit";
@@ -46,6 +48,7 @@ export default {
             file: null,
             error: null,
             errorMsg: null,
+            loading: null,
             editorSettings: {
                 modules: {
                     imageResize: {}
@@ -54,7 +57,8 @@ export default {
         }
     },
     components: {
-        BlogCoverPreview
+        BlogCoverPreview,
+        Loading
     },
     methods: {
         fileChange() {
@@ -83,6 +87,7 @@ export default {
         uploadBlog() {
             if (this.blogTitle.length !== 0 && this.blogHTML !== 0) {
                 if (this.file) {
+                    this.loading = true;
                     const storageRef = firebase.storage().ref();
                     const docRef = storageRef.child(`documents/BlogCoverPhotos/${this.$store.state.blogPhotoName}`);
                     docRef.put(this.file).on(
@@ -92,6 +97,7 @@ export default {
                         }, 
                         (err) => {
                             console.log(err);
+                            this.loading = false;
                         }, 
                         async () => {
                             const downloadURL = await docRef.getDownloadURL();
@@ -107,6 +113,7 @@ export default {
                                 profileId: this.profileId,
                                 date: timestamp,
                             });
+                            this.loading = false;
                             this.$router.push({name: "ViewBlog"});
                         }
                     );
