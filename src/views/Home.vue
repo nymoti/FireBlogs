@@ -1,12 +1,12 @@
 <template>
   <div class="home">
     <BlogPost v-if="!user" :post="welcomeScreen"/>
-    <BlogPost :post="post" v-for="(post, index) in sampleBlogPost" :key="index"/>
+    <BlogPost :post="post" v-for="(post, index) in blogPostsFeed" :key="index"/>
     <div class="blog-card-wrap">
       <div class="container">
         <h3>View More Recent Blogs</h3>
         <div class="blog-cards">
-          <BlogCard :post="post" v-for="(post, index) in sampleBlogCard" :key="index" />
+          <BlogCard :post="post" v-for="(post, index) in blogPostsCards" :key="index" />
         </div>
       </div>
     </div>
@@ -40,24 +40,15 @@ export default {
         welcomeScreen: true,
         photo: "coding"
       },
-      sampleBlogPost: [
-        {
-          title: "Bootstrap primarily ",
-          blogHTML: "Bootstrap primarily uses the following media query ranges—or breakpoints—in our source Sass files for our layout, grid system, and components.",
-          blogCoverPhoto: "beautiful-stories"
-        },
-        {
-          title: "There are also media ",
-          blogHTML: "There are also media queries and mixins for targeting a single segment of screen sizes using the minimum and maximum breakpoint widths.",
-          blogCoverPhoto: "designed-for-everyone"
-        }
-      ],
     }
   },
   computed: {
-    sampleBlogCard() {
-      return this.$store.state.sampleBlogCard;
-    },       
+    blogPostsFeed() {
+      return this.$store.getters.blogPostsFeed;
+    },
+    blogPostsCards() {
+      return this.$store.getters.blogPostsCards;
+    },        
     user() {
         return this.$store.state.user;
     }
