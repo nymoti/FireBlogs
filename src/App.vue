@@ -33,9 +33,11 @@ export default {
       }
     });
     this.checkRoute();
-    this.$store.dispatch("getPosts");
+    this.$store.dispatch("getPost");
   },
-  mounted() {},
+  mounted() {
+    console.log(this.$store.state.blogPosts);
+  },
   methods: {
     checkRoute() {
       if (this.$route.name === "Login" || this.$route.name === "Register" || this.$route.name === "ForgotPassword") {
